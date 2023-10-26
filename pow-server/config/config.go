@@ -27,7 +27,7 @@ func LoadConfig() error {
 		return err
 	}
 
-	err = applyConfigFile("./config.toml")
+	err = applyConfigFile("../config.toml")
 	if err != nil {
 		return err
 	}

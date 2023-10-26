@@ -44,13 +44,13 @@ func(l *logger) CloseFile() {
 	return
 }
 
-func openLogFile() (*os.File, error) {
+func openLogFile() (logFile *os.File, err error) {
 	// path with unix time added to name to save different log files for any new start of program
-	path := fmt.Sprintf("./logs/clientlog%d.log", time.Now().Unix)
+	path := fmt.Sprintf("../logs/clientlog%d.log", time.Now().Unix)
 
-	logFile, err := os.OpenFile(path, os.O_APPEND|os.O_RDWR|os.O_CREATE, 0644)
+	logFile, err = os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0644)
 	if err != nil {
-		log.Panic(err)
+		return
 	}
 
 	return logFile, nil

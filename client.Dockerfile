@@ -1,9 +1,9 @@
 FROM golang:1.19 AS builder
 
-WORKDIR /build
+WORKDIR /build/cmd
 
-COPY ./pow-client/ .
+COPY ./pow-client/ ../
 
 RUN go mod download
 
-RUN GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main ./cmd
+RUN GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./cmd/main ./

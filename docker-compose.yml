@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: server.Dockerfile
-    image: rwsnti/pow-server:latest
-    command: ./main
+#    image: rwsnti/pow-server:latest
+    command: ./cmd/main
     environment:
       SERVER_HOST: "0.0.0.0"
       SERVER_PORT: "4242"
@@ -21,8 +21,8 @@ services:
     build:
       context: .
       dockerfile: client.Dockerfile
-    image: rwsnti/pow-client:latest
-    command: ./main
+#    image: rwsnti/pow-client:latest
+    command: ./cmd/main
     environment:
       SERVER_HOST: "server"
       SERVER_PORT: "4242"
