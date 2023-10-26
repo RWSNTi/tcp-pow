@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: server.Dockerfile
+    image: rwsnti/pow-server:latest
+    command: ./main
+    environment:
+      SERVER_HOST: "0.0.0.0"
+      SERVER_PORT: "4242"
+      DIFFICULTY: "5" # sets the number of leading target values client must calculate in hash
+      TARGET_VALUE: "0" # sets target value client must calculate in hash
+      TIMEOUT: "10" # time limit in seconds for client's connection to server, after it finishes, client's connection will be dropped
+    ports:
+      - '4242:4242'
+    restart: 'no'
+
+  client:
+    build:
+      context: .
+      dockerfile: client.Dockerfile
+    image: rwsnti/pow-client:latest
+    command: ./main
+    environment:
+      SERVER_HOST: "server"
+      SERVER_PORT: "4242"
+      INTERVAL_SECONDS: "5"
+      ITERATIONS_LIMIT: "2000000"
+    restart: 'no'
+    depends_on:
+      - server
